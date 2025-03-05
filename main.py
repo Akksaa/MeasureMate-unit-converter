@@ -133,21 +133,20 @@ if category == "💬 Need Help? Ask AI":
             response = model.generate_content(user_input)
             st.text_area("Bot:", response.text, height=150)
         else:
-            st.write("oops! something went wrong")
+            st.error("Please write something!")
 
 else:
-    is_chatbot = ""
     st.markdown('<p id="title">✨ MeasureMate ✨</p>', unsafe_allow_html=True)
 
     col1, col2 = st.columns(2)
     from_unit = col1.selectbox("From:", list(units[category].keys()))
     to_unit = col2.selectbox("To:", list(units[category].keys()))
 
-    value = st.number_input("Enter the Value:", min_value=0.0, step=0.1)
+    value = st.number_input("Enter the Value:", min_value=0, step=1)
 
     if st.button("Convert"):
         result = convert(value, from_unit, to_unit, category)
-        st.success(f"{value} {from_unit} = {result:.4f} {to_unit}")
+        st.success(f"{value} {from_unit} = {result:.2f} {to_unit}")
 
 
 
